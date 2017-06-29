@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Main {
+public class Boggle {
 
     static char[][] board = new char[5][5];
     static String[] words;
@@ -24,7 +24,15 @@ public class Main {
             }
 
             for (int j=0; j < wordCase; j++) {
-                System.out.println(hasWords(0, 0, words[j]) ? "YES" : "NO");
+	            boolean result = false;
+	            for (int x=0; x<5; x++) {
+	                for (int y=0; y<5; y++) {
+                        if(hasWords(y, x, words[j])) {
+                            result = true;
+                        }
+                    }
+                }
+                System.out.println(words[j] + " " + (result? "YES" : "NO"));
             }
         }
     }
@@ -50,6 +58,6 @@ public class Main {
     }
 
     private static boolean inRange(int y, int x) {
-        return y >= 0 && x >= 0;
+        return (y >= 0 && x >= 0) && (y < 5 && x < 5);
     }
 }
